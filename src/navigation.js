@@ -7,8 +7,8 @@ import JobListScreen from './screens/list';
 import ShortlistScreen from './screens/shortlist';
 import AppliedScreen from './screens/applied';
 import ProfileScreen from './screens/profile';
-import JobDetailScreen from './screens/detail';
 import AuthScreen from './screens/auth';
+import JobDetailScreen from './screens/detail';
 
 const HomeStack = createBottomTabNavigator();
 const HomeNav = () => (
@@ -16,7 +16,7 @@ const HomeNav = () => (
         <HomeStack.Screen name="Home" component={JobListScreen} />
         <HomeStack.Screen name="Shortlisted" component={ShortlistScreen} />
         <HomeStack.Screen name="Applied" component={AppliedScreen} />
-        <HomeStack.Screen name="Profile" component={ProfileScreen} />
+        <HomeStack.Screen name="Profile" component={AuthScreen} />
     </HomeStack.Navigator>
 )
 

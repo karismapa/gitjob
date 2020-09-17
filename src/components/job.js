@@ -10,7 +10,11 @@ const JobComponent = (props) => {
             style={styles.container}
             onPress={() => navigation.navigate("Detail", {id: props.job.id})}
         >
-            <Image source={require('../assets/images/job-picture.png')} />
+            <Image
+                source={{uri: props.job.company_logo}}
+                defaultSource={require('../assets/images/job-picture.png')}
+                style={styles.logo}
+            />
             <View style={styles.textArea}>
                 <Text style={styles.jobTitle}>{props.job.title}</Text>
                 <Text style={styles.company}>at {props.job.company}</Text>
@@ -30,6 +34,14 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginVertical: 5,
         padding: 13,
+    },
+    logo: {
+        height: 80,
+        width: 80,
+        resizeMode: 'contain',
+        borderRadius: 25,
+        overflow: 'hidden',
+        margin: 5,
     },
     textArea: {
         paddingLeft: 13,
