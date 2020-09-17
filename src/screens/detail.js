@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, Linking, Alert } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import React, { useCallback, useEffect, useState } from 'react';
+import { View, Text, Image, StyleSheet, ScrollView, Linking, Alert, TouchableOpacity, ActivityIndicator } from 'react-native';
+import Axios from 'axios';
 
 import jobs from '../assets/data/jobs.json';
 
@@ -42,7 +42,22 @@ const ButtonToURL = ({ url }) => {
 
 const JobDetailScreen = ({ route }) => {
     const { id } = route.params
-    const job = jobs.find(job => job.id === id)
+
+    const [isLoading, setLoading] = useState(true)
+    const [jobDetail, setJobDetail] = useState({})
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await Axios.get(`https://jobs.github.com/positions/${id}.json?markdown=true`)
+                setJobDetail(response.data)
+            } catch(err) {
+                console.error(err)
+            } finally {
+                setLoading(false)
+            }
+        })()
+    }, [])
 
     return (
         <View style={{flex: 1}}>
@@ -50,37 +65,39 @@ const JobDetailScreen = ({ route }) => {
                 <View style={styles.headerContent}>
                     <View style={styles.headerTitle}>
                         <Image
-                            source={{uri: job.company_logo}}
+                            source={{uri: jobDetail.company_logo}}
                             defaultSource={require('../assets/images/job-picture.png')}
                             style={styles.logo}
                         />
                         <View style={{paddingLeft: 2}}>
-                            <Text style={{fontSize: 16}}>{job.company}</Text>
-                            <Text style={{fontSize: 13, color: '#C4C4C4',}}>{job.company_url}</Text>
-                            <Text style={{fontSize: 13, color: '#C4C4C4',}}>{job.location}</Text>
+                            <Text style={{fontSize: 16}}>{jobDetail.company}</Text>
+                            <Text style={{fontSize: 13, color: '#C4C4C4',}}>{jobDetail.company_url}</Text>
+                            <Text style={{fontSize: 13, color: '#C4C4C4',}}>{jobDetail.location}</Text>
                         </View>
                     </View>
                     <View style={styles.jobTitle}>
-                        <Text style={{fontSize: 18}}>{job.type} </Text>
-                        <Text style={{fontSize: 18, fontWeight: 'bold'}}>{job.title}</Text>
+                        <Text style={{fontSize: 18}}>{jobDetail.type} </Text>
+                        <Text style={{fontSize: 18, fontWeight: 'bold'}}>{jobDetail.title}</Text>
                     </View>
                     <View style={{borderBottomColor: '#C4C4C4', borderBottomWidth: 1, marginHorizontal: 20}} />
                 </View>
             </View>
 
-            <ScrollView style={styles.content}>
-                <Text>posted at {job.created_at}</Text>
+            {isLoading ? <ActivityIndicator /> : (
+                <ScrollView style={styles.content}>
+                    <Text>posted at {jobDetail.created_at}</Text>
 
-                <Text style={{fontWeight: 'bold'}}>{'\n'}Description</Text>
-                <Text>{job.description}</Text>
+                    <Text style={{fontWeight: 'bold'}}>{'\n'}Description</Text>
+                    <Text>{jobDetail.description}</Text>
 
-                <Text style={{fontWeight: 'bold'}}>{'\n'}How to apply?</Text>
-                <Text>{job.how_to_apply}</Text>
+                    <Text style={{fontWeight: 'bold'}}>{'\n'}How to apply?</Text>
+                    <Text>{jobDetail.how_to_apply}</Text>
 
-                <View style={{height: 120, alignItems: 'flex-end', justifyContent: 'center'}}>
-                    <ButtonToURL url={job.url} />
-                </View>
-            </ScrollView>
+                    <View style={{height: 120, alignItems: 'flex-end', justifyContent: 'center'}}>
+                        <ButtonToURL url={jobDetail.url} />
+                    </View>
+                </ScrollView>
+            )}
         </View>
     )
 }
