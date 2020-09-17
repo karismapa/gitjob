@@ -2,18 +2,34 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import SplashScreen from './screens/splash';
+import JobListScreen from './screens/list';
+import ShortlistScreen from './screens/shortlist';
+import AppliedScreen from './screens/applied';
+import ProfileScreen from './screens/profile';
+import JobDetailScreen from './screens/detail';
+import AuthScreen from './screens/auth';
 
 const HomeStack = createBottomTabNavigator();
 const HomeNav = () => (
     <HomeStack.Navigator>
-        <HomeStack.Screen name="Home" />
+        <HomeStack.Screen name="Home" component={JobListScreen} />
+        <HomeStack.Screen name="Shortlisted" component={ShortlistScreen} />
+        <HomeStack.Screen name="Applied" component={AppliedScreen} />
+        <HomeStack.Screen name="Profile" component={ProfileScreen} />
     </HomeStack.Navigator>
 )
 
 const RootStack = createStackNavigator();
 const RootNav = () => (
-    <RootStack.Navigator>
+    <RootStack.Navigator
+        initialRouteName="Splash"
+        screenOptions={{headerShown: false, cardStyle: {backgroundColor: 'white'}}}
+    >
+        <RootStack.Screen name="Splash" component={SplashScreen} />
         <RootStack.Screen name="HomeStack" component={HomeNav} />
+        <RootStack.Screen name="Detail" component={JobDetailScreen} />
+        <RootStack.Screen name="Auth" component={AuthScreen} />
     </RootStack.Navigator>
 )
 
