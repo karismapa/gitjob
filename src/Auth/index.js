@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
-import styles from '../assets/style/style';
+import { useDispatch } from 'react-redux';
+import styles from '../_assets/style/style';
+import { action } from '../_redux/authRedux';
 
 const AuthScreen = () => {
+    const [email, setEmail] = useState('')
+
+    const dispatch = useDispatch()
+
+    const login = useCallback(() => {
+        dispatch(action.login({ email: 'karisma.mulyono@gmail.com' }), [dispatch])
+    })
+    
     return (
         <View style={{padding: 25, ...styles.container}}>
             <View style={{width: '100%'}}>
@@ -69,6 +79,7 @@ const AuthScreen = () => {
                     justifyContent: 'center',
                     marginTop: 40,
                 }}
+                onPress={() => login()}
             >
                 <Text
                     style={{

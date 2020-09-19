@@ -1,13 +1,16 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useSelector } from 'react-redux';
 
-import cmnStyles from '../assets/style/style';
+import cmnStyles from '../_assets/style/style';
 
 const ProfileScreen = () => {
+    const email = useSelector(state => state)
+
     return (
         <View style={cmnStyles.container}>
             <Image
-                source={require('../assets/images/job-picture.png')}
+                source={require('../_assets/images/job-picture.png')}
                 style={styles.logo}
             />
             <Text>Hello,</Text>

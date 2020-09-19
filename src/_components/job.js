@@ -12,7 +12,7 @@ const JobComponent = (props) => {
         >
             <Image
                 source={{uri: props.job.company_logo}}
-                defaultSource={require('../assets/images/job-picture.png')}
+                defaultSource={require('../_assets/images/job-picture.png')}
                 style={styles.logo}
             />
             <View style={styles.textArea}>

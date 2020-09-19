@@ -4,7 +4,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import Axios from 'axios';
 
-import JobComponent from '../components/job';
+import JobComponent from '../_components/job';
+import { useSelector } from 'react-redux';
 
 
 const JobListScreen = () => {
@@ -12,6 +13,8 @@ const JobListScreen = () => {
     const [jobs, setJobs] = useState({})
     const [text, setText] = useState("")
     const [searchKey, setSearchKey] = useState("")
+
+    const { email } = useSelector(state => state)
 
     useEffect(() => {
         (async () => {
@@ -32,6 +35,7 @@ const JobListScreen = () => {
     
     return (
         <View>
+            <Text>{email}</Text>
             <View style={{height: 40, backgroundColor: '#000000', alignItems: 'flex-end'}}>
                 <Text style={{color: '#FFFFFF', paddingTop: 5, paddingRight: 15, fontSize: 25, fontWeight: 'bold'}}>GitJob</Text>
             </View>

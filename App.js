@@ -8,13 +8,16 @@
  */
 
 import React from 'react';
-
 import AppController from './src';
+import { Provider } from 'react-redux';
+import store from './src/_redux/store';
 
 export default class App extends React.Component {
     render() {
         return (
-        <AppController />
+            <Provider store={store}>
+                <AppController />
+            </Provider>
         )
     }
 };

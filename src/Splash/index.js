@@ -11,7 +11,7 @@ const SplashScreen = ({ navigation }) => {
 
     return (
         <LinearGradient colors={['#222222', '#000000', '#222222']} style={styles.container}>
-            <Image source={require('../assets/images/logo-splash-white.png')} style={styles.logo} />
+            <Image source={require('../_assets/images/logo-splash-white.png')} style={styles.logo} />
         </LinearGradient>
     )
 }

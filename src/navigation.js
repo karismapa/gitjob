@@ -2,13 +2,13 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import SplashScreen from './screens/splash';
-import JobListScreen from './screens/list';
-import ShortlistScreen from './screens/shortlist';
-import AppliedScreen from './screens/applied';
-import ProfileScreen from './screens/profile';
-import AuthScreen from './screens/auth';
-import JobDetailScreen from './screens/detail';
+import SplashScreen from './Splash';
+import JobListScreen from './List';
+import ShortlistScreen from './Shortlist';
+import AppliedScreen from './Applied';
+import Profile from './Profile';
+import JobDetailScreen from './Detail';
+import AuthScreen from './Auth';
 
 const HomeStack = createBottomTabNavigator();
 const HomeNav = () => (
@@ -16,7 +16,8 @@ const HomeNav = () => (
         <HomeStack.Screen name="Home" component={JobListScreen} />
         <HomeStack.Screen name="Shortlisted" component={ShortlistScreen} />
         <HomeStack.Screen name="Applied" component={AppliedScreen} />
-        <HomeStack.Screen name="Profile" component={AuthScreen} />
+        <HomeStack.Screen name="Profile" component={Profile} />
+        <HomeStack.Screen name="Auth" component={AuthScreen} />
     </HomeStack.Navigator>
 )
 
@@ -29,7 +30,6 @@ const RootNav = () => (
         <RootStack.Screen name="Splash" component={SplashScreen} />
         <RootStack.Screen name="HomeStack" component={HomeNav} />
         <RootStack.Screen name="Detail" component={JobDetailScreen} />
-        <RootStack.Screen name="Auth" component={AuthScreen} />
     </RootStack.Navigator>
 )
 

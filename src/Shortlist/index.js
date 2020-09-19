@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import styles from '../assets/style/style';
+import styles from '../_assets/style/style';
 
 const ShortlistScreen = () => {
     return (

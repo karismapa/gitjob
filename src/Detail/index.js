@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, Linking, Alert, TouchableOpacity, ActivityIndicator } from 'react-native';
 import Axios from 'axios';
 
-import jobs from '../assets/data/jobs.json';
+import jobs from '../_assets/data/jobs.json';
 
 const ButtonToURL = ({ url }) => {
     const handlePress = useCallback(async () => {
@@ -66,7 +66,7 @@ const JobDetailScreen = ({ route }) => {
                     <View style={styles.headerTitle}>
                         <Image
                             source={{uri: jobDetail.company_logo}}
-                            defaultSource={require('../assets/images/job-picture.png')}
+                            defaultSource={require('../_assets/images/job-picture.png')}
                             style={styles.logo}
                         />
                         <View style={{paddingLeft: 2}}>
