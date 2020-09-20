@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { useDispatch } from 'react-redux';
 import cmStyles from '../_assets/style/style';
 import Header from '../_components/header';
@@ -17,6 +17,15 @@ const AuthScreen = () => {
         <View style={{flex: 1}}>
             <Header />
             <View style={{...cmStyles.center, padding: 25}}>
+                <Image
+                    source={require('../_assets/images/logo-circle.png')}
+                    style={{
+                        height: 100,
+                        width: 100,
+                        resizeMode: 'contain',
+                        marginBottom: 30,
+                    }}
+                />
                 <View style={{width: '100%', alignItems: 'center'}}>
                     <Text style={{fontSize: 12}}>You're not logged in yet</Text>
                 </View>
