@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, Linking, Alert, TouchableOpacity, ActivityIndicator } from 'react-native';
 import Axios from 'axios';
+import cmStyles from '../_assets/style/style';
 
 const ButtonToURL = ({ url }) => {
     const handlePress = useCallback(async () => {
@@ -15,16 +16,10 @@ const ButtonToURL = ({ url }) => {
 
     return (
         <TouchableOpacity
-            style={styles.button}
+            style={{...cmStyles.button, margin: 10, width: 125}}
             onPress={handlePress}
         >
-            <Text
-                style={{
-                    fontSize: 14,
-                    fontWeight: 'bold',
-                    color: 'white',
-                }}
-            >APPLY</Text>
+            <Text style={cmStyles.buttonText}>APPLY</Text>
         </TouchableOpacity>
     )
 }
@@ -127,16 +122,6 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         borderColor: '#DFDFDF',
         borderWidth: 1,
-    },
-    button: {
-        margin: 10,
-        padding: 10,
-        backgroundColor: 'black',
-        width: 80,
-        alignItems: 'center',
-        borderRadius: 10,
-        height: 50,
-        justifyContent: 'center',
     },
 })
 
