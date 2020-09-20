@@ -2,8 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, Linking, Alert, TouchableOpacity, ActivityIndicator } from 'react-native';
 import Axios from 'axios';
 
-import jobs from '../_assets/data/jobs.json';
-
 const ButtonToURL = ({ url }) => {
     const handlePress = useCallback(async () => {
         const supported = await Linking.canOpenURL(url)
@@ -17,16 +15,7 @@ const ButtonToURL = ({ url }) => {
 
     return (
         <TouchableOpacity
-            style={{
-                margin: 10,
-                padding: 10,
-                backgroundColor: 'black',
-                width: 80,
-                alignItems: 'center',
-                borderRadius: 10,
-                height: 50,
-                justifyContent: 'center',
-            }}
+            style={styles.button}
             onPress={handlePress}
         >
             <Text
@@ -35,7 +24,7 @@ const ButtonToURL = ({ url }) => {
                     fontWeight: 'bold',
                     color: 'white',
                 }}
-            >Apply</Text>
+            >APPLY</Text>
         </TouchableOpacity>
     )
 }
@@ -138,6 +127,16 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         borderColor: '#DFDFDF',
         borderWidth: 1,
+    },
+    button: {
+        margin: 10,
+        padding: 10,
+        backgroundColor: 'black',
+        width: 80,
+        alignItems: 'center',
+        borderRadius: 10,
+        height: 50,
+        justifyContent: 'center',
     },
 })
 

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import Axios from 'axios';
-
-import JobComponent from '../_components/job';
 import { useSelector } from 'react-redux';
 
+import Header from '../_components/header';
+import JobComponent from './job';
 
 const JobListScreen = () => {
     const [isLoading, setLoading] = useState(true)
@@ -14,7 +14,7 @@ const JobListScreen = () => {
     const [text, setText] = useState("")
     const [searchKey, setSearchKey] = useState("")
 
-    const { email } = useSelector(state => state)
+    const { email } = useSelector(state => state.email)
 
     useEffect(() => {
         (async () => {
@@ -35,12 +35,11 @@ const JobListScreen = () => {
     
     return (
         <View>
-            <Text>{email}</Text>
-            <View style={{height: 40, backgroundColor: '#000000', alignItems: 'flex-end'}}>
-                <Text style={{color: '#FFFFFF', paddingTop: 5, paddingRight: 15, fontSize: 25, fontWeight: 'bold'}}>GitJob</Text>
-            </View>
-            <LinearGradient colors={['#000000', '#333333']} style={{height: 80, backgroundColor: '#000000', justifyContent: 'center'}}>
-                <View style={{backgroundColor: '#FFF', width: '60%', height: 40, borderRadius: 10, marginLeft: 20, flexDirection: 'row', alignItems: 'center'}}>
+            <Header />
+            <LinearGradient colors={['#000000', '#333333']} style={styles.header}>
+                <Text style={{color: '#FFFFFF'}}>{email ? `Hi, ${email}` : `Hello`}</Text>
+                <Text style={styles.greetings}>Find your best suited job here</Text>
+                <View style={styles.searchBar}>
                     <Icon name="search" size={20} style={{paddingHorizontal: 10}} />
                     <TextInput
                         style={{flex: 1}}
@@ -68,5 +67,28 @@ const JobListScreen = () => {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    header: {
+        height: 90,
+        backgroundColor: '#000',
+        paddingLeft: '2%',
+        justifyContent: 'flex-end',
+    },
+    greetings: {
+        color: '#FFF',
+        paddingBottom: 10,
+        fontSize: 12,
+    },
+    searchBar: {
+        backgroundColor: '#FFF',
+        width: '98%',
+        height: 40,
+        borderRadius: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 10,
+    },
+})
 
 export default JobListScreen

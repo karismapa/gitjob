@@ -1,96 +1,79 @@
 import React, { useCallback, useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
-import styles from '../_assets/style/style';
+import cmStyles from '../_assets/style/style';
+import Header from '../_components/header';
 import { action } from '../_redux/authRedux';
 
 const AuthScreen = () => {
     const [email, setEmail] = useState('')
 
     const dispatch = useDispatch()
-
     const login = useCallback(() => {
-        dispatch(action.login({ email: 'karisma.mulyono@gmail.com' }), [dispatch])
+        dispatch(action.login({ email: email }), [dispatch])
     })
     
     return (
-        <View style={{padding: 25, ...styles.container}}>
-            <View style={{width: '100%'}}>
-                <Text>Login</Text>
-            </View>
-            <View
-                style={{
-                    borderRadius: 10,
-                    borderWidth: 1,
-                    borderColor: '#000000',
-                    width: '100%',
-                    paddingVertical: 30,
-                }}
-            >
-                <View
-                    style={{
-                        width: '90%',
-                        marginHorizontal: '5%',
-                        paddingVertical: 10,
-                    }}
-                >
-                    <Text>Email</Text>
-                    <TextInput
-                        style={{
-                            height: 40,
-                            width: '100%',
-                            borderWidth: 1,
-                            borderColor: '#000000',
-                            borderRadius: 5,
-                            paddingHorizontal: 10,
-                        }}
-                    />
+        <View style={{flex: 1}}>
+            <Header />
+            <View style={{...cmStyles.center, padding: 25}}>
+                <View style={{width: '100%', alignItems: 'center'}}>
+                    <Text style={{fontSize: 12}}>You're not logged in yet</Text>
                 </View>
-                <View
-                    style={{
-                        width: '90%',
-                        marginHorizontal: '5%',
-                        paddingVertical: 10,
-                    }}
-                >
-                    <Text>Password</Text>
-                    <TextInput
-                        style={{
-                            height: 40,
-                            width: '100%',
-                            borderWidth: 1,
-                            borderColor: '#000000',
-                            borderRadius: 5,
-                            paddingHorizontal: 10,
-                        }}
-                        secureTextEntry={true}
-                    />
+                <View style={styles.formContainer}>
+                    <View style={styles.formArea}>
+                        <Text style={styles.formTitle}>Email</Text>
+                        <TextInput
+                            style={styles.formInput}
+                            value={email}
+                            onChangeText={(email) => setEmail(email)}
+                        />
+                    </View>
+                    <View style={styles.formArea}>
+                        <Text style={styles.formTitle}>Password</Text>
+                        <TextInput
+                            style={styles.formInput}
+                            secureTextEntry={true}
+                        />
+                    </View>
                 </View>
+                <TouchableOpacity
+                    style={{...cmStyles.button, margin: 10}}
+                    onPress={() => login()}
+                >
+                    <Text style={cmStyles.buttonText}>LOGIN</Text>
+                </TouchableOpacity>
             </View>
-            <TouchableOpacity
-                style={{
-                    margin: 10,
-                    padding: 10,
-                    backgroundColor: 'black',
-                    width: '100%',
-                    alignItems: 'center',
-                    borderRadius: 20,
-                    height: 70,
-                    justifyContent: 'center',
-                    marginTop: 40,
-                }}
-                onPress={() => login()}
-            >
-                <Text
-                    style={{
-                        fontSize: 20,
-                        fontWeight: 'bold',
-                        color: 'white',
-                    }}
-                >LOGIN</Text>
-            </TouchableOpacity>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    formContainer: {
+        borderRadius: 25,
+        borderWidth: 1,
+        borderColor: '#000000',
+        width: '100%',
+        paddingVertical: 20,
+        marginVertical: 25,
+    },
+    formArea: {
+        width: '90%',
+        marginHorizontal: '5%',
+        paddingVertical: 10,
+    },
+    formTitle: {
+        fontSize: 12,
+        paddingBottom: 5,
+    },
+    formInput: {
+        height: 40,
+        width: '100%',
+        borderWidth: 1,
+        borderColor: '#000000',
+        borderRadius: 16,
+        paddingHorizontal: 10,
+    },
+})
 
 export default AuthScreen

@@ -8,7 +8,6 @@ import ShortlistScreen from './Shortlist';
 import AppliedScreen from './Applied';
 import Profile from './Profile';
 import JobDetailScreen from './Detail';
-import AuthScreen from './Auth';
 
 const HomeStack = createBottomTabNavigator();
 const HomeNav = () => (
@@ -17,7 +16,6 @@ const HomeNav = () => (
         <HomeStack.Screen name="Shortlisted" component={ShortlistScreen} />
         <HomeStack.Screen name="Applied" component={AppliedScreen} />
         <HomeStack.Screen name="Profile" component={Profile} />
-        <HomeStack.Screen name="Auth" component={AuthScreen} />
     </HomeStack.Navigator>
 )
 

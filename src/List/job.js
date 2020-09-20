@@ -7,7 +7,7 @@ const JobComponent = (props) => {
 
     return (
         <TouchableOpacity
-            style={styles.container}
+            style={styles.jobContainer}
             onPress={() => navigation.navigate("Detail", {id: props.job.id})}
         >
             <Image
@@ -25,7 +25,7 @@ const JobComponent = (props) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    jobContainer: {
         width: '100%',
         flexDirection: 'row',
         alignItems: 'center',

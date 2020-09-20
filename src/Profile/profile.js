@@ -1,102 +1,140 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useSelector } from 'react-redux';
-
-import cmnStyles from '../_assets/style/style';
+import LinearGradient from 'react-native-linear-gradient';
+import { useDispatch, useSelector } from 'react-redux';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { action } from '../_redux/authRedux';
+import Header from '../_components/header';
+import cmStyles from '../_assets/style/style';
 
 const ProfileScreen = () => {
-    const email = useSelector(state => state)
+    const { email } = useSelector(state => state.email)
+
+    const dispatch = useDispatch()
+    const logout = useCallback(() => {
+        dispatch(action.logout({}), [dispatch])
+    })
 
     return (
-        <View style={cmnStyles.container}>
-            <Image
-                source={require('../_assets/images/job-picture.png')}
-                style={styles.logo}
-            />
-            <Text>Hello,</Text>
-            <Text style={{fontSize: 12, marginBottom: 20}}>karisma.mulyono@gmail.com</Text>
-            
-            <View
-                style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-around',
-                }}
-            >
-                <TouchableOpacity
-                    style={{
-                        height: 120,
-                        width: '40%',
-                        ...styles.button,
-                    }}
+        <View>
+            <Header />
+            <View style={{alignItems: 'center'}}>
+                <LinearGradient
+                    colors={['#000000', '#333333']}
+                    style={styles.header}
                 >
-                    <Text
-                        style={{
-                            fontSize: 14,
-                            fontWeight: 'bold',
-                            color: 'white',
-                        }}
-                    >you have 0 saved jobs</Text>
-                    <Text
-                        style={{
-                            fontSize: 14,
-                            fontWeight: 'bold',
-                            color: 'white',
-                        }}
-                    >go to saved job</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={{
-                        height: 120,
-                        width: '40%',
-                        ...styles.button,
-                    }}
-                >
-                    <Text
-                        style={{
-                            fontSize: 14,
-                            fontWeight: 'bold',
-                            color: 'white',
-                        }}
-                    >Check your application!</Text>
-                </TouchableOpacity>
+                    <Image
+                        source={{uri: `https://api.adorable.io/avatars/285/abott@adorable.png`}}
+                        style={styles.logo}
+                    />
+                    <Text style={{fontSize: 20, fontWeight: '800'}}>{email ? email : `Unknown User`}</Text>
+                </LinearGradient>
+
+                <View style={{width: '100%', marginTop: 110}}>
+                    <View style={styles.menuArea}>
+                        <TouchableOpacity style={styles.menuTouch}>
+                            <Text style={{marginLeft: 10}}>Skill</Text>
+                            <Icon name="navigate-next" size={20} style={{paddingHorizontal: 10}} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.menuArea}>
+                        <TouchableOpacity style={styles.menuTouch}>
+                            <Text style={{marginLeft: 10}}>Experience</Text>
+                            <Icon name="navigate-next" size={20} style={{paddingHorizontal: 10}} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.menuArea}>
+                        <TouchableOpacity style={styles.menuTouch}>
+                            <Text style={{marginLeft: 10}}>Curriculum Vitae</Text>
+                            <Icon name="navigate-next" size={20} style={{paddingHorizontal: 10}} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                
+                <View style={styles.bigButtonArea}>
+                    <TouchableOpacity style={styles.bigButton}>
+                        <LinearGradient colors={['#333333', '#000000']} style={styles.bigButtonGradient}>
+                            <Text style={{fontSize: 12, fontWeight: '100', color: 'white'}}>You have</Text>
+                            <Text style={{fontSize: 50, fontWeight: 'bold', color: 'white'}}>0</Text>
+                            <Text style={{fontSize: 12, fontWeight: '100', color: 'white'}}>saved job</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.bigButton}>
+                        <LinearGradient colors={['#333333', '#000000']} style={styles.bigButtonGradient}>
+                            <Text style={{fontSize: 12, fontWeight: '100', color: 'white'}}>You have</Text>
+                            <Text style={{fontSize: 50, fontWeight: 'bold', color: 'white'}}>0</Text>
+                            <Text style={{fontSize: 12, fontWeight: '100', color: 'white'}}>active application</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
+                </View>
+                <View style={{width: '100%', alignItems: 'center', marginTop: 25}}>
+                    <TouchableOpacity
+                        style={{...cmStyles.button, width: '87%'}}
+                        onPress={() => logout()}
+                    >
+                        <Text style={cmStyles.buttonText}>LOGOUT</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-            <TouchableOpacity
-                style={{
-                    height: 50,
-                    width: '85%',
-                    ...styles.button,
-                }}
-            >
-                <Text
-                    style={{
-                        fontSize: 14,
-                        fontWeight: 'bold',
-                        color: 'white',
-                    }}
-                >Logout</Text>
-            </TouchableOpacity>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    header: {
+        backgroundColor: '#000000',
+        height: 80,
+        width: '100%',
+        borderWidth: 1,
+        borderColor: 'black',
+        alignItems: 'center',
+    },
     logo: {
         height: 80,
         width: 80,
-        resizeMode: 'contain',
         borderRadius: 25,
         overflow: 'hidden',
         margin: 5,
-        marginBottom: 20,
+        marginTop: 40,
+        marginBottom: 15,
     },
     button: {
-        marginHorizontal: 10,
-        marginVertical: 30,
         padding: 10,
-        backgroundColor: '#8F8F8F',
+        backgroundColor: '#000000',
         alignItems: 'center',
-        borderRadius: 10,
+        borderRadius: 20,
         justifyContent: 'center',
+    },
+    menuArea: {
+        height: 40,
+        borderWidth: 1,
+        borderColor: 'black',
+        justifyContent: 'center',
+        marginHorizontal: 30,
+        borderRadius: 10,
+        marginVertical: 2,
+    },
+    menuTouch: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    bigButtonArea: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        marginTop: 30,
+    },
+    bigButton: {
+        ...cmStyles.button,
+        height: 120,
+        width: '40%',
+    },
+    bigButtonGradient: {
+        width: '100%',
+        alignItems: 'center',
+        borderRadius: 5,
     },
 })
 

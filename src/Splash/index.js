@@ -1,33 +1,37 @@
 import React, { useEffect } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import styles from '../_assets/style/style';
 
 const SplashScreen = ({ navigation }) => {
     useEffect(() => {
         setTimeout(() => {
             navigation.navigate("HomeStack")
-        }, 500)
+        }, 1500)
     }, [])
 
     return (
-        <LinearGradient colors={['#222222', '#000000', '#222222']} style={styles.container}>
-            <Image source={require('../_assets/images/logo-splash-white.png')} style={styles.logo} />
+        <LinearGradient
+            colors={[
+                '#222222',
+                '#000000',
+                '#222222',
+            ]}
+            style={{
+                ...styles.center,
+                backgroundColor: '#000000',
+            }}
+        >
+            <Image
+                source={require('../_assets/images/logo-splash-white.png')}
+                style={{
+                    height: 125,
+                    width: 125,
+                    resizeMode: 'contain',
+                }}
+            />
         </LinearGradient>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#000000',
-    },
-    logo: {
-        height: 125,
-        width: 125,
-        resizeMode: 'contain',
-    }
-})
 
 export default SplashScreen
